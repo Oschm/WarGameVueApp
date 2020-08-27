@@ -18,7 +18,7 @@ export default {
       // AxiosService.get('login', this.loginSuccessfull, this.loginFailed);
     },
     loginSuccessfull: function () {
-      this.$router.push('About');
+      this.$router.push('Overview');
     },
     loginFailed: function (error) {
       alert(error);

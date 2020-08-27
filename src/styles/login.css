@@ -2,8 +2,17 @@
     display: grid;
     text-align: center;
     align-content: center;
+    margin: auto;
+    width: 500px;
+    margin-top: 10%;
 
 
+}
+
+
+.header {
+    position: relative;
+    left: 30px;
 }
 
 input {
@@ -21,9 +30,4 @@ button {
 
 label {
     float: left;
-}
-
-body {
-    margin-top: 10%;
-
 }

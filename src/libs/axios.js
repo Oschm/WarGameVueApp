@@ -26,9 +26,7 @@ class AxiosService {
       const token = this.JWT;
 
       if (token != null) {
-        config.headers.Cookie = {
-          token: token,
-        };
+        config.headers.common.Authorization = `Bearer ${token}`;
       }
 
       return config;
@@ -37,13 +35,15 @@ class AxiosService {
       console.log('Error during req interception');
     });
     // after request
-    service.interceptors.response.use(this.handleSuccess, this.handleError);
-
+    service.interceptors.response.use(this.handleSuccess.bind(this), this.handleError.bind(this));
     this.service = service;
   }
 
   handleSuccess(response) {
-    // check how to set jwt cookie
+    // check how to set jwt
+    if (response.data && response.data.token) {
+      this.JWT = response.data.token;
+    }
     console.log(`Call Successfull, response: ${JSON.stringify(response)}`);
     return response;
   }
@@ -51,7 +51,7 @@ class AxiosService {
   handleError = (error) => {
     switch (error.response.status) {
       case 401:
-        router.push('login');
+        router.push('/');
         break;
       case 404:
         // TODO implement 404
