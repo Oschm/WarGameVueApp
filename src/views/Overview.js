@@ -10,8 +10,8 @@ export default {
     userData: {
       firstName: '',
       lastName: '',
-      wins: null,
-      losses: null,
+      wins: 0,
+      losses: 12,
     },
   }),
   components: {
@@ -34,6 +34,14 @@ export default {
     },
     getUserDataFail(error) {
       alert(error.message);
+    },
+    onClick(route) {
+      this.$router.push({
+        name: route,
+        params: {
+          userData: this.userData,
+        },
+      });
     },
   },
 };

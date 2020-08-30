@@ -20,7 +20,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Application</v-toolbar-title>
@@ -28,9 +27,25 @@
     <v-main>
       <HeaderComp v-bind:userData="userData">
       </HeaderComp>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-          <v-col class="text-center">
+      <v-divider></v-divider>
+      <v-container>
+        <v-row align="start" justify="start">
+          <v-col cols="3" sm="4">
+            <v-card class="mx-auto" outlined>
+              <v-card-text class="text--primary">
+                <v-alert v-if="errorState" type="error">
+                  Please select a User.
+                </v-alert>
+                <div>Start a Game with <v-combobox v-bind:error="errorState"
+                    @change="resetErrorState" v-model="selectedUser" :items="playerObjects"
+                    :item-text="formatter" label="Select User to play a game with" return-object>
+                  </v-combobox>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn color="primary" @click="createGame()">Create Game</v-btn>
+              </v-card-actions>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -40,4 +55,4 @@
     </v-footer>
   </v-app>
 </template>
-<script src="./Overview.js" />
+<script src="./CreateGame.js" />
